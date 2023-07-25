@@ -81,4 +81,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
-        run: "bash ci/retry.sh gh release upload --clobber nightly WezTerm-*.zip WezTerm-*.exe *.sha256"
+        run: "bash ci/retry.sh gh release create nightly WezTerm-*.zip WezTerm-*.exe *.sha256"
