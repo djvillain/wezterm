@@ -77,8 +77,11 @@ jobs:
       - name: "Checksum"
         shell: bash
         run: "for f in WezTerm-*.zip WezTerm-*.exe ; do sha256sum $f > $f.sha256 ; done"
-      - name: "Upload to Nightly Release"
+      - name: "Create Nightly Release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: "bash ci/retry.sh gh release create nightly WezTerm-*.zip WezTerm-*.exe *.sha256"
+      - name: "upload nightly"
+        shell: bash
+        run: "bash ci/retry.sh gh release upload --clobber nightly WezTerm-*.zip WezTerm-*.exe *.sha256"
